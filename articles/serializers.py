@@ -38,4 +38,4 @@ class ReactionToArticleSerializer(serializers.Serializer):
                 raise ValidationError("Already Reacted")
             return data
         except models.ObjectDoesNotExist:
-            ValidationError("Article Does not Exist")
+            raise ValidationError("Article Does not Exist")
