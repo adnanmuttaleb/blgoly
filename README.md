@@ -10,3 +10,8 @@ To install the project run:
 ```
 
 The main app is the `article` app, which contains the *views, models, serializers*.
+
+
+
+
+The used UI library: https://tailwindcss.com
