@@ -22,11 +22,12 @@ class ReactionViewSet(viewsets.ViewSet):
     def create(self, request):
         serializer = ReactionToArticleSerializer(user=request.user, data=request.data)
         if serializer.is_valid():
-            reaction = Reaction.objects.create(
+            reaction = Reaction(
                 user=request.user,
                 article=serializer.validated_data["article_id"],
                 type=serializer.validated_data["type"]
             )
+            reaction.save()
             return Response(status=status.HTTP_201_CREATED)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)

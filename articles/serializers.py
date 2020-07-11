@@ -1,3 +1,4 @@
+from django.db import models
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
@@ -30,8 +31,11 @@ class ReactionToArticleSerializer(serializers.Serializer):
         self.user = kwargs.pop('user')
         super().__init__(*args, **kwargs)
 
-    def validate_article_id(self, art_id):
+    def validate(self, data):
         try:
-            return Article.objects.get(id=art_id)
-        except:
+            data["article_id"] = Article.objects.get(id=data["article_id"])
+            if Reaction.objects.filter(article=data["article_id"], user=self.user, type=data["type"]).exists():
+                raise ValidationError("Already Reacted")
+            return data
+        except models.ObjectDoesNotExist:
             ValidationError("Article Does not Exist")

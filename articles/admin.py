@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article, Category
+from .models import Article, Category, Reaction
 
 
 @admin.register(Article)
@@ -12,4 +12,9 @@ class ArticleModelAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryModelAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Reaction)
+class ReactionModelAdmin(admin.ModelAdmin):
     pass
