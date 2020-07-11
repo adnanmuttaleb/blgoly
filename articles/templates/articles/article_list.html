@@ -1,0 +1,65 @@
+<html>
+<head>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+{% for article in articles %}
+<div class="flex flex-col items-center justify-between">
+    <div class="max-w-sm rounded overflow-hidden shadow-lg m-2">
+        <img class="w-full" src="https://picsum.photos/id/845/384/234.jpg" alt="Sunset in the mountains">
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl">{{ article.title }}</div>
+            <div class="text-xs mb-2 flex justify-between">
+                <div>By: {{article.author}}</div>
+                <div>{{ article.publish_date }}</div>
+            </div>
+            <p class="text-gray-700 text-base">
+                {{article.description}}
+            </p>
+        </div>
+        <div class="flex justify-between">
+            <div class="px-6 py-4">
+                <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"># {{article.category.title}}</span>
+            </div>
+            <button onclick="react({{article.id}})" class="px-6 py-4" name="like-btn">
+                <span><i class="fa fa-heart"></i>{{article.likes}}</span>
+            </button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+           const cookies = document.cookie.split(';');
+           for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    function react(articleId) {
+        const csrftoken = getCookie('csrftoken');
+        let data = {article_id: articleId, type: 1};
+        fetch("/content/reactions/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify(data)
+        }).finally(console.log)
+    }
+
+</script>
+</body>
+</html>
+
+
