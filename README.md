@@ -23,7 +23,9 @@ The main app is the `article` app, which contains the *views, models, serializer
 * `content/article_list` where user can view articles.
 * `contaent/articles`, `contaent/categories` api's endpoint for listing, creating..etc articles and categorie.  
 
+To make usage more easy I have included database with 3 articles and 2 categories and 4 users:
 
-
+  1. `admin` with password `123456`
+  2 `guest, guest2, guest3` with password `blogly123456`.
 
 The used UI library: https://tailwindcss.com
