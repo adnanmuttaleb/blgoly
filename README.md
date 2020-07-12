@@ -28,4 +28,7 @@ To make usage more easy I have included database with 3 articles and 2 categorie
   1. `admin` with password `123456`
   2. `guest, guest2, guest3` with password `blogly123456`.
 
+
+## Additional Notes
+
 The used UI library: https://tailwindcss.com
