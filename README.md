@@ -1,6 +1,8 @@
 # blgoly
 
-To install the project run:
+## Installation 
+
+### Manuall Installation 
 
 ```
 1. pip install -r requirements.txt
@@ -8,6 +10,13 @@ To install the project run:
 3. python manage.py migrate
 
 ```
+
+### Docker Installation
+
+`docker-compose up`
+
+
+## Usage
 
 The main app is the `article` app, which contains the *views, models, serializers*. Important URLS:
 
