@@ -23,12 +23,12 @@
             <div class="px-6 py-4">
                 <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2"># {{article.category.title}}</span>
             </div>
-            <button onclick="react({{article.id}})" class="px-6 py-4" name="like-btn">
+            <button onclick="react(this, {{article.id}})" class="px-6 py-4" name="like-btn">
                 {% reacted request.user article as user_reacted %}
                 {% if user_reacted %}
                     <span><i class="fa fa-heart"></i> {{article.likes}}</span>
                 {% else %}
-                     <span><i onclick="reactionTransition(this)" class="fa fa-heart-o"> {{article.likes}}</i> </span>
+                     <span><i class="fa fa-heart-o"> {{article.likes}}</i> </span>
                 {% endif %}
             </button>
         </div>
@@ -51,7 +51,7 @@
         }
         return cookieValue;
     }
-    function react(articleId) {
+    function react(el, articleId) {
         const csrftoken = getCookie('csrftoken');
         let data = {article_id: articleId, type: 1};
         fetch("/content/reactions/", {
@@ -61,13 +61,12 @@
                 'X-CSRFToken': csrftoken
             },
             body: JSON.stringify(data)
-        }).finally(console.log)
-    }
-
-    function reactionTransition(el){
-        el.classList.remove("fa-heart-o");
-        el.classList.add("fa-heart");
-        el.innerText = parseInt(el.innerText) + 1;
+        }).then(() => {
+            var label = el.querySelector("i");
+            label.classList.remove("fa-heart-o");
+            label.classList.add("fa-heart");
+            label.innerText = ` ${parseInt(el.innerText) + 1}`;
+        })
     }
 
 </script>
