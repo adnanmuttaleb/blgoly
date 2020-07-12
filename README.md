@@ -9,7 +9,10 @@ To install the project run:
 
 ```
 
-The main app is the `article` app, which contains the *views, models, serializers*.
+The main app is the `article` app, which contains the *views, models, serializers*. Important URLS:
+
+* `content/article_list` where user can view articles.
+* `contaent/articles`, `contaent/categories` api's endpoint for listing, creating..etc articles and categorie.  
 
 
 
