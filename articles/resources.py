@@ -1,5 +1,6 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Article, Category, Reaction
 from .serializers import ArticleSerializer, CategorySerializer, ReactionSerializer, ReactionToArticleSerializer
@@ -18,6 +19,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class ReactionViewSet(viewsets.ViewSet):
     queryset = Reaction.objects.all()
     serializer_class = ReactionSerializer
+    permission_classes = [IsAuthenticated]
 
     def create(self, request):
         serializer = ReactionToArticleSerializer(user=request.user, data=request.data)
