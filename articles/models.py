@@ -11,6 +11,14 @@ class Reaction(models.Model):
     article = models.ForeignKey('Article', on_delete=models.CASCADE)
     type = models.IntegerField(choices=ReactionType.choices)
 
+    @staticmethod
+    def reacted(user, article, type=ReactionType.LIKE):
+        return Reaction.objects.filter(
+            user=user,
+            article=article,
+            type=type
+        ).exists()
+
     class Meta:
         unique_together = ('article', 'user', 'type')
 
