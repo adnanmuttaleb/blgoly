@@ -34,7 +34,7 @@ class ReactionToArticleSerializer(serializers.Serializer):
     def validate(self, data):
         try:
             data["article_id"] = Article.objects.get(id=data["article_id"])
-            if Reaction.objects.filter(article=data["article_id"], user=self.user, type=data["type"]).exists():
+            if Reaction.reacted(article=data["article_id"], user=self.user):
                 raise ValidationError("Already Reacted")
             return data
         except models.ObjectDoesNotExist:

@@ -26,9 +26,9 @@
             <button onclick="react(this, {{article.id}})" class="px-6 py-4" name="like-btn">
                 {% reacted request.user article as user_reacted %}
                 {% if user_reacted %}
-                    <span><i class="fa fa-heart"></i> {{article.likes}}</span>
+                <span><i class="fa fa-heart"></i> {{article.likes}}</span>
                 {% else %}
-                     <span><i class="fa fa-heart-o"> {{article.likes}}</i> </span>
+                <span><i class="fa fa-heart-o"> {{article.likes}}</i> </span>
                 {% endif %}
             </button>
         </div>
@@ -61,13 +61,18 @@
                 'X-CSRFToken': csrftoken
             },
             body: JSON.stringify(data)
-        }).then(() => {
+        }).then((response) => {
+            if(!response.ok)
+                return;
+
             var label = el.querySelector("i");
             label.classList.remove("fa-heart-o");
             label.classList.add("fa-heart");
             label.innerText = ` ${parseInt(el.innerText) + 1}`;
+
         })
     }
+
 
 </script>
 </body>
