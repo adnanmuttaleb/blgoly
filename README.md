@@ -20,7 +20,7 @@
 
 The main app is the `article` app, which contains the *views, models, serializers*. Important URLS (all require authentication at least):
 
-* `/content/article_list` where user can view articles and like (UI).
+* `/content/article_list` where users can view and interact with articles (UI).
 * `GET /content/articles`, `GET contaent/categories` api's endpoints for listing articles and categories.
 * `GET /content/articles/<id>` api's endpoint to view specific article.
 * `POST /content/reactions/` api's endpoint to make a reaction to an article. You need to provide two params in request body for this endpint: `article_id` and `type` (`1` in case of like reaction).
